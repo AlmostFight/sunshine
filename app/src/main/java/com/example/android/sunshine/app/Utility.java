@@ -1,3 +1,18 @@
+/*
+ * Copyright (C) 2014 The Android Open Source Project
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package com.example.android.sunshine.app;
 
 import android.content.Context;
@@ -19,18 +34,20 @@ public class Utility {
     public static boolean isMetric(Context context) {
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
         return prefs.getString(context.getString(R.string.pref_units_key),
-                context.getString(R.string.pref_units_default))
-                .equals(context.getString(R.string.pref_units_default));
+                context.getString(R.string.pref_units_metric))
+                .equals(context.getString(R.string.pref_units_metric));
     }
 
-    static String formatTemperature(Context context, double temperature, boolean isMetric) {
-        double temp;
-        if ( !isMetric ) {
-            temp = 9*temperature/5+32;
-        } else {
-            temp = temperature;
+    public static String formatTemperature(Context context, double temperature) {
+        // Data stored in Celsius by default.  If user prefers to see in Fahrenheit, convert
+        // the values here.
+        String suffix = "\u00B0";
+        if (!isMetric(context)) {
+            temperature = (temperature * 1.8) + 32;
         }
-        return context.getString(R.string.format_temperature, temp);
+
+        // For presentation, assume the user doesn't care about tenths of a degree.
+        return String.format(context.getString(R.string.format_temperature), temperature);
     }
 
     static String formatDate(long dateInMilliseconds) {
@@ -67,7 +84,11 @@ public class Utility {
         // is "Today, June 24"
         if (julianDay == currentJulianDay) {
             String today = context.getString(R.string.today);
-            return getFormattedMonthDay(context, dateInMillis);
+            int formatId = R.string.format_full_friendly_date;
+            return String.format(context.getString(
+                    formatId,
+                    today,
+                    getFormattedMonthDay(context, dateInMillis)));
         } else if ( julianDay < currentJulianDay + 7 ) {
             // If the input date is less than a week in the future, just return the day name.
             return getDayName(context, dateInMillis);
@@ -225,5 +246,4 @@ public class Utility {
         }
         return -1;
     }
-
 }
