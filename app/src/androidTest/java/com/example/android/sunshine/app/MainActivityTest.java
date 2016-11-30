@@ -47,31 +47,6 @@ public class MainActivityTest {
                 allOf(withId(R.id.title), withText("Settings"), isDisplayed()));
         textView.perform(click());
 
-        ViewInteraction linearLayout = onView(
-                allOf(childAtPosition(
-                        allOf(withId(android.R.id.list),
-                                withParent(withClassName(is("android.widget.LinearLayout")))),
-                        0),
-                        isDisplayed()));
-        linearLayout.perform(click());
-
-        ViewInteraction editText = onView(
-                allOf(withId(android.R.id.edit), withText("94043"),
-                        withParent(withClassName(is("android.widget.LinearLayout")))));
-        editText.perform(scrollTo(), click());
-
-        ViewInteraction editText2 = onView(
-                allOf(withId(android.R.id.edit), withText("94043"),
-                        withParent(withClassName(is("android.widget.LinearLayout")))));
-        editText2.perform(scrollTo(), replaceText("Arnhem,nl"), closeSoftKeyboard());
-
-        ViewInteraction button = onView(
-                allOf(withId(android.R.id.button1), withText("OK"),
-                        withParent(allOf(withClassName(is("com.android.internal.widget.ButtonBarLayout")),
-                                withParent(withClassName(is("android.widget.LinearLayout"))))),
-                        isDisplayed()));
-        button.perform(click());
-
         ViewInteraction imageButton = onView(
                 allOf(withContentDescription("Navigate up"),
                         withParent(allOf(withClassName(is("android.widget.Toolbar")),
