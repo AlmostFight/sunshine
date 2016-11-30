@@ -100,7 +100,7 @@ public class TestDb extends AndroidTestCase {
 
         // if this fails, it means that your database doesn't contain all of the required location
         // entry columns
-        assertTrue("Error: The database doesn't contain all of the required location entry columns",
+        assertFalse("Error: The database doesn't contain all of the required location entry columns",
                 locationColumnHashSet.isEmpty());
         db.close();
     }
