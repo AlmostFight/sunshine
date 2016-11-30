@@ -67,7 +67,7 @@ public class Utility {
         // is "Today, June 24"
         if (julianDay == currentJulianDay) {
             String today = context.getString(R.string.today);
-            int formatId = R.string.format_full_friendly_date;
+            //int formatId = R.string.format_full_friendly_date;
             return String.format(context.getString(
                     formatId,
                     today,
