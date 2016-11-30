@@ -20,6 +20,9 @@ import static android.support.test.InstrumentationRegistry.getInstrumentation;
 import static android.support.test.espresso.Espresso.onView;
 import static android.support.test.espresso.Espresso.openActionBarOverflowOrOptionsMenu;
 import static android.support.test.espresso.action.ViewActions.click;
+import static android.support.test.espresso.action.ViewActions.closeSoftKeyboard;
+import static android.support.test.espresso.action.ViewActions.replaceText;
+import static android.support.test.espresso.action.ViewActions.scrollTo;
 import static android.support.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static android.support.test.espresso.matcher.ViewMatchers.withClassName;
 import static android.support.test.espresso.matcher.ViewMatchers.withContentDescription;
@@ -48,18 +51,26 @@ public class MainActivityTest {
                 allOf(childAtPosition(
                         allOf(withId(android.R.id.list),
                                 withParent(withClassName(is("android.widget.LinearLayout")))),
-                        1),
+                        0),
                         isDisplayed()));
         linearLayout.perform(click());
 
-        ViewInteraction checkedTextView = onView(
-                allOf(withId(android.R.id.text1), withText("Imperial"),
-                        childAtPosition(
-                                allOf(withClassName(is("com.android.internal.app.AlertController$RecycleListView")),
-                                        withParent(withClassName(is("android.widget.FrameLayout")))),
-                                1),
+        ViewInteraction editText = onView(
+                allOf(withId(android.R.id.edit), withText("94043"),
+                        withParent(withClassName(is("android.widget.LinearLayout")))));
+        editText.perform(scrollTo(), click());
+
+        ViewInteraction editText2 = onView(
+                allOf(withId(android.R.id.edit), withText("94043"),
+                        withParent(withClassName(is("android.widget.LinearLayout")))));
+        editText2.perform(scrollTo(), replaceText("Arnhem,nl"), closeSoftKeyboard());
+
+        ViewInteraction button = onView(
+                allOf(withId(android.R.id.button1), withText("OK"),
+                        withParent(allOf(withClassName(is("com.android.internal.widget.ButtonBarLayout")),
+                                withParent(withClassName(is("android.widget.LinearLayout"))))),
                         isDisplayed()));
-        checkedTextView.perform(click());
+        button.perform(click());
 
         ViewInteraction imageButton = onView(
                 allOf(withContentDescription("Navigate up"),
@@ -71,11 +82,9 @@ public class MainActivityTest {
         ViewInteraction linearLayout2 = onView(
                 allOf(childAtPosition(
                         withId(R.id.listview_forecast),
-                        10),
+                        3),
                         isDisplayed()));
         linearLayout2.perform(click());
-
-        openActionBarOverflowOrOptionsMenu(getInstrumentation().getTargetContext());
 
         ViewInteraction imageButton2 = onView(
                 allOf(withContentDescription("Navigate up"),
@@ -83,36 +92,6 @@ public class MainActivityTest {
                                 withParent(withId(R.id.action_bar_container)))),
                         isDisplayed()));
         imageButton2.perform(click());
-
-        openActionBarOverflowOrOptionsMenu(getInstrumentation().getTargetContext());
-
-        ViewInteraction textView2 = onView(
-                allOf(withId(R.id.title), withText("Settings"), isDisplayed()));
-        textView2.perform(click());
-
-        ViewInteraction linearLayout3 = onView(
-                allOf(childAtPosition(
-                        allOf(withId(android.R.id.list),
-                                withParent(withClassName(is("android.widget.LinearLayout")))),
-                        1),
-                        isDisplayed()));
-        linearLayout3.perform(click());
-
-        ViewInteraction checkedTextView2 = onView(
-                allOf(withId(android.R.id.text1), withText("Metric"),
-                        childAtPosition(
-                                allOf(withClassName(is("com.android.internal.app.AlertController$RecycleListView")),
-                                        withParent(withClassName(is("android.widget.FrameLayout")))),
-                                0),
-                        isDisplayed()));
-        checkedTextView2.perform(click());
-
-        ViewInteraction imageButton3 = onView(
-                allOf(withContentDescription("Navigate up"),
-                        withParent(allOf(withClassName(is("android.widget.Toolbar")),
-                                withParent(withClassName(is("com.android.internal.widget.ActionBarContainer"))))),
-                        isDisplayed()));
-        imageButton3.perform(click());
 
     }
 
