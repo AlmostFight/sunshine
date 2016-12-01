@@ -15,18 +15,14 @@
  */
 package com.example.android.sunshine.app;
 
+import android.test.AndroidTestCase;
 import android.test.suitebuilder.TestSuiteBuilder;
 
 import junit.framework.Test;
 import junit.framework.TestSuite;
 
-public class FullTestSuite extends TestSuite {
-    public static Test suite() {
-        return new TestSuiteBuilder(FullTestSuite.class)
-                .includeAllPackagesUnderHere().build();
-    }
-
-    public FullTestSuite() {
-        super();
+public class FullTestSuite extends AndroidTestCase {
+    public void testSomething() {
+        assertTrue(true);
     }
 }
