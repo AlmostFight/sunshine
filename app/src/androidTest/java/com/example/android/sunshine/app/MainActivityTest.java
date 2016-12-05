@@ -20,9 +20,6 @@ import static android.support.test.InstrumentationRegistry.getInstrumentation;
 import static android.support.test.espresso.Espresso.onView;
 import static android.support.test.espresso.Espresso.openActionBarOverflowOrOptionsMenu;
 import static android.support.test.espresso.action.ViewActions.click;
-import static android.support.test.espresso.action.ViewActions.closeSoftKeyboard;
-import static android.support.test.espresso.action.ViewActions.replaceText;
-import static android.support.test.espresso.action.ViewActions.scrollTo;
 import static android.support.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static android.support.test.espresso.matcher.ViewMatchers.withClassName;
 import static android.support.test.espresso.matcher.ViewMatchers.withContentDescription;
@@ -40,12 +37,43 @@ public class MainActivityTest {
     public ActivityTestRule<MainActivity> mActivityTestRule = new ActivityTestRule<>(MainActivity.class);
 
     @Test
-    public void mainActivityTest() {
+    public void mainActivityTest2() {
         openActionBarOverflowOrOptionsMenu(getInstrumentation().getTargetContext());
 
         ViewInteraction textView = onView(
                 allOf(withId(R.id.title), withText("Settings"), isDisplayed()));
         textView.perform(click());
+
+        ViewInteraction linearLayout = onView(
+                allOf(childAtPosition(
+                        allOf(withId(android.R.id.list),
+                                withParent(withClassName(is("android.widget.LinearLayout")))),
+                        2),
+                        isDisplayed()));
+        linearLayout.perform(click());
+
+        ViewInteraction linearLayout2 = onView(
+                allOf(childAtPosition(
+                        allOf(withId(android.R.id.list),
+                                withParent(withClassName(is("android.widget.LinearLayout")))),
+                        2),
+                        isDisplayed()));
+        linearLayout2.perform(click());
+
+        ViewInteraction linearLayout3 = onView(
+                allOf(childAtPosition(
+                        allOf(withId(android.R.id.list),
+                                withParent(withClassName(is("android.widget.LinearLayout")))),
+                        1),
+                        isDisplayed()));
+        linearLayout3.perform(click());
+
+        ViewInteraction button = onView(
+                allOf(withId(android.R.id.button2), withText("Cancel"),
+                        withParent(allOf(withClassName(is("com.android.internal.widget.ButtonBarLayout")),
+                                withParent(withClassName(is("android.widget.LinearLayout"))))),
+                        isDisplayed()));
+        button.perform(click());
 
         ViewInteraction imageButton = onView(
                 allOf(withContentDescription("Navigate up"),
@@ -53,20 +81,6 @@ public class MainActivityTest {
                                 withParent(withClassName(is("com.android.internal.widget.ActionBarContainer"))))),
                         isDisplayed()));
         imageButton.perform(click());
-
-        ViewInteraction linearLayout2 = onView(
-                allOf(childAtPosition(
-                        withId(R.id.listview_forecast),
-                        3),
-                        isDisplayed()));
-        linearLayout2.perform(click());
-
-        ViewInteraction imageButton2 = onView(
-                allOf(withContentDescription("Navigate up"),
-                        withParent(allOf(withId(R.id.action_bar),
-                                withParent(withId(R.id.action_bar_container)))),
-                        isDisplayed()));
-        imageButton2.perform(click());
 
     }
 
