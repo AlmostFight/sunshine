@@ -8,7 +8,7 @@ Take the course to find out how to build this app a step at a taime, and eventua
 This is the second version of the Sunshin code. Therepository has been updated on:
 
 * **February 13th, 2015** - Major updateqwe
-* February 25, 2015 - Minor bug fixe
+* February 25, 2015 - Minor bug fixeasd
 * March 4th, 2015 - Minor bug fxeasd
 qweqwezxc
 For the original version, please go [here](https://github.com/udacity/Sunshine).
