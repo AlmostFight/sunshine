@@ -9,7 +9,7 @@ This is the second version of the Sunshin code. Therepository has been updated o
 
 * **February 13th, 2015** - Major update
 * February 25, 2015 - Minor bug fixe
-* March 4th, 2015 - Minor bug fxe
+* March 4th, 2015 - Minor bug fxeasd
 
 For the original version, please go [here](https://github.com/udacity/Sunshine).
 
