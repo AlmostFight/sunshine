@@ -7,7 +7,7 @@ Take the course to find out how to build this app a step at a taime, and eventua
 
 This is the second version of the Sunshin code. Therepository has been updated on:
 
-* **February 13th, 2015** - Major update
+* **February 13th, 2015** - Major updateqwe
 * February 25, 2015 - Minor bug fixe
 * March 4th, 2015 - Minor bug fxeasd
 qweqwe
