@@ -102,7 +102,7 @@ public class MainActivity extends ActionBarActivity implements ForecastFragment.
             }
             mLocation = location;
         }
-        int kaas = 6;
+        int kaas = 7;
     }
 
     @Override
